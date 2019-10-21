@@ -1,0 +1,20 @@
+{
+	"users": [
+		{"id": 1,
+		"name": "erick"
+		},
+		{"id": 2,
+		"name": "fabricio"
+		}
+	],
+	
+	"products": [
+		{"id": 1,
+		"description": "TV"
+		},
+		{"id": 2,
+		"description": "Smartphone"
+		}
+	]
+	
+}
