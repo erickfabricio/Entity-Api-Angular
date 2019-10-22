@@ -18,12 +18,12 @@ export class ListComponent implements OnInit {
   constructor(private entityService: EntityService) { }
 
   ngOnInit() {
-    this.find();
+    this.find();    
   }
 
   find() {
     this.entityService.find(this.entity)
-      .subscribe(entities => {console.log(entities); this.entities = entities });
+      .subscribe(entities => { console.log(entities); this.entities = entities });
   }
 
 }

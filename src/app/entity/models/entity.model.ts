@@ -1,17 +1,22 @@
 export class EntityModel {
+            
+    public values: any[];
 
-    descripciones: string[];
-    valores: string[];
-    campos: number;
-        
-    constructor() {
-        //this.campos = 1;
+    constructor(){
+        this.values = [];
     }
 
-    deserialize(input: any): this {
-        console.log(input);
+    public deserialize(input: any): this {
+        
+        this.values = Object.keys(input).map(function(_) { return input[_]; })
+
+        console.log(input);        
+        console.log(Object.assign(this, input));
+
         return Object.assign(this, input);
     }
+
+    
 
    
 
