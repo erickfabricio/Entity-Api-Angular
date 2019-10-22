@@ -5,14 +5,12 @@ import { EntityService } from 'src/app/entity/services/entity.service';
 import { UserCrudComponent } from '../user-crud/user-crud.component';
 
 @Component({
-  selector: 'user-list',
+  selector: 'entity-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-
-  entity: string = "users";
-
+  
   //List
   users: UserModel[];
 
@@ -27,8 +25,8 @@ export class UserListComponent implements OnInit {
   }
 
   find() {
-    this.entityService.find(this.entity)
-      .subscribe(users => { console.log(users); this.users = <UserModel[]>users });
+    this.entityService.find(UserModel.entity)
+      .subscribe(users => { console.log("UserListComponent.find->") , console.log(users); this.users = <UserModel[]>users });
   }
 
   showModalCrud(action: string, user: UserModel) {
@@ -40,7 +38,9 @@ export class UserListComponent implements OnInit {
       }
     });
 
-    
+
+    //Actualizacion de lista
+
     //ERROR corregir
     //Evento al ocultar el modal
     this.modalService.onHide
@@ -54,9 +54,11 @@ export class UserListComponent implements OnInit {
 
         //Delete modal 
         this.modal.content.process = false;
-        console.log("modals:" + this.modalService.getModalsCount());
+        console.log("modals:" + this.modalService.getModalsCount());        
         this.modalService.removeBackdrop();
 
+        //Aqui
+        
       });
   }
 

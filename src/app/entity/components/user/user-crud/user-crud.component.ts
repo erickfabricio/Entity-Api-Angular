@@ -6,28 +6,30 @@ import { EntityService } from 'src/app/entity/services/entity.service';
 import { UserModel } from 'src/app/entity/models/user.model';
 
 @Component({
-  selector: 'user-crud',
+  selector: 'entity-user-crud',
   templateUrl: './user-crud.component.html',
   styleUrls: ['./user-crud.component.css']
 })
 export class UserCrudComponent implements OnInit {
 
-  entity: string;
-  user: UserModel;
+  //Input
   action: string;
+  user: UserModel;
+  
+  //Form
   title: string;
   form: FormGroup;
   visibleControls;
+  
+  //Process
   process: boolean;
 
-  constructor(private modal: BsModalRef, private entityService: EntityService) { }
+  constructor(public modal: BsModalRef, private entityService: EntityService) { }
 
   ngOnInit() {
-
-    this.entity = "users";
-
+    
     console.log("Action:" + this.action);
-    console.log("user:" + this.user);
+    console.log("User:" + this.user);
 
     //Default
     this.visibleControls = {
@@ -110,7 +112,7 @@ export class UserCrudComponent implements OnInit {
       this.user.name = String(this.form.get('name').value).trim();
 
       //Api 
-      this.entityService.save(this.entity, this.user)
+      this.entityService.save(UserModel.entity, this.user)
         .subscribe(user => { console.log("New user:" + user); this.user = <UserModel>user });
 
       //Process
@@ -136,7 +138,7 @@ export class UserCrudComponent implements OnInit {
       this.user.name = String(this.form.get('name').value).trim();
 
       //Api 
-      this.entityService.update(this.entity, this.user.id, this.user)
+      this.entityService.update(UserModel.entity, this.user.id, this.user)
         .subscribe(user => { console.log("Update user:" + user); this.user = <UserModel>user });
 
       //Process
@@ -154,7 +156,7 @@ export class UserCrudComponent implements OnInit {
   onDelete() {
 
     //Api 
-    this.entityService.remove(this.entity, this.user.id)
+    this.entityService.remove(UserModel.entity, this.user.id)
       .subscribe(user => { console.log("Delete user:" + user); this.user = <UserModel>user });
 
     //Process
