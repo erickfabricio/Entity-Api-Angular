@@ -1,0 +1,61 @@
+<!-- HEADER -->
+
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{title}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modal.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+
+<!-- BODY -->
+
+<div class="modal-body">
+
+    <form [formGroup]="form">
+
+        <!-- id -->
+        <div class="form-group row" *ngIf="visibleControls.id">
+            <label for="user-id" class="col-sm-2 col-form-label">id</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="user-id" formControlName="id" placeholder="id">
+            </div>
+        </div>
+
+        <!-- name -->
+        <div class="form-group row" *ngIf="visibleControls.name">
+            <label for="user-name" class="col-sm-2 col-form-label">name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="user-name" formControlName="name"
+                    placeholder="name">
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<!-- FOOTER -->
+
+<div [ngSwitch]="action">
+
+    <div class="modal-footer" *ngSwitchCase="'CREATE'">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.hide()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onCreate()">Create</button>
+    </div>
+
+    <div class="modal-footer" *ngSwitchCase="'READ'">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.hide()">Close</button>        
+    </div>
+
+    <div class="modal-footer" *ngSwitchCase="'UPDATE'">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.hide()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onUpdate()">Update</button>
+    </div>
+
+    <div class="modal-footer" *ngSwitchCase="'DELETE'">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.hide()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onDelete()">Delete</button>
+    </div>
+
+</div>

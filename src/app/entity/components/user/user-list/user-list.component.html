@@ -1,0 +1,33 @@
+<p>user-list works!</p>
+<!-- New user -->
+<h1>Users <button type="button" class="btn btn-outline-success" (click)="showModalCrud('CREATE')">Create</button> </h1>
+
+<!-- Table users -->
+<table class="table table-hover">
+
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let user of users ; index as i">
+            <th scope="row">{{i+1}}</th>
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td><button type="button" class="btn btn-outline-primary"
+                    (click)="showModalCrud('READ', user)">Read</button>
+            </td>
+            <td><button type="button" class="btn btn-outline-warning"
+                    (click)="showModalCrud('UPDATE', user)">Update</button>
+            </td>
+            <td><button type="button" class="btn btn-outline-danger"
+                    (click)="showModalCrud('DELETE', user)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+
+</table>
