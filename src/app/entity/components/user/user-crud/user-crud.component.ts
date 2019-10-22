@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input  } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -13,8 +13,8 @@ import { UserModel } from 'src/app/entity/models/user.model';
 export class UserCrudComponent implements OnInit {
 
   //Input
-  action: string;
-  user: UserModel;
+  @Input('action') action: string;
+  @Input('user') user: UserModel;
   
   //Form
   title: string;
@@ -22,7 +22,16 @@ export class UserCrudComponent implements OnInit {
   visibleControls;
   
   //Process
-  process: boolean;
+  @Output() isUpdateList = new EventEmitter<boolean>();
+  
+  updateList(isUpdate: boolean) {
+    if(isUpdate){
+      this.isUpdateList.emit(isUpdate);
+    }    
+    //Hide modal
+    this.modal.hide();
+    this.form.reset();
+  }
 
   constructor(public modal: BsModalRef, private entityService: EntityService) { }
 
@@ -36,8 +45,6 @@ export class UserCrudComponent implements OnInit {
       id: true,
       name: true
     };
-
-    this.process = false;
 
     //Action
     switch (this.action) {
@@ -56,6 +63,8 @@ export class UserCrudComponent implements OnInit {
     }
 
   }
+
+  //************ FORM OF MODAL ************//
 
   create() {
     this.title = "Create user";
@@ -100,10 +109,9 @@ export class UserCrudComponent implements OnInit {
   }
 
   //************ ACTIONS OF MODAL ************//
+
   onCreate() {
-
     if (this.form.valid) {
-
       console.log("Valid");
 
       //Assignment of values
@@ -113,24 +121,15 @@ export class UserCrudComponent implements OnInit {
 
       //Api 
       this.entityService.save(UserModel.entity, this.user)
-        .subscribe(user => { console.log("New user:" + user); this.user = <UserModel>user });
-
-      //Process
-      this.process = true;
-
-      //Hide modal      
-      this.modal.hide();
-      this.form.reset();
-
+        .subscribe(user => { console.log("New user"); this.user = <UserModel>user; this.updateList(true) });
+      
     } else {
       console.log("No valid");
     }
   }
 
   onUpdate() {
-
     if (this.form.valid) {
-
       console.log("Valid");
 
       //Assignment of values      
@@ -139,14 +138,7 @@ export class UserCrudComponent implements OnInit {
 
       //Api 
       this.entityService.update(UserModel.entity, this.user.id, this.user)
-        .subscribe(user => { console.log("Update user:" + user); this.user = <UserModel>user });
-
-      //Process
-      this.process = false; //No es necesario actualizar la lista
-
-      //Hide modal      
-      this.modal.hide();
-      this.form.reset();
+        .subscribe(user => { console.log("Update user"); this.user = <UserModel>user; this.updateList(false) });
 
     } else {
       console.log("No valid");
@@ -154,18 +146,9 @@ export class UserCrudComponent implements OnInit {
   }
 
   onDelete() {
-
-    //Api 
+    //Api
     this.entityService.remove(UserModel.entity, this.user.id)
-      .subscribe(user => { console.log("Delete user:" + user); this.user = <UserModel>user });
-
-    //Process
-    this.process = true;
-
-    //Hide modal      
-    this.modal.hide();
-    this.form.reset();
-
+      .subscribe(user => { this.user = <UserModel>user; console.log("Delete user"); this.updateList(true) });
   }
 
 }

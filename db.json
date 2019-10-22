@@ -1,20 +1,16 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "erick2"
+      "name": "erick",
+      "id": 1
     },
     {
-      "name": "migue",
-      "id": 7
+      "name": "a",
+      "id": 2
     },
     {
-      "name": "silvia",
-      "id": 8
-    },
-    {
-      "name": "qqq",
-      "id": 9
+      "name": "a",
+      "id": 3
     }
   ],
   "products": [
