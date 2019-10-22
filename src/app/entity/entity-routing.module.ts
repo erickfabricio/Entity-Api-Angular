@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TestEntityComponent } from './test/test-entity/test-entity.component';
 import { UserListComponent } from './components/user/user-list/user-list.component';
+import { ListComponent } from './components/list/list.component';
 
 const routes: Routes = [
    { path: '', component : TestEntityComponent },
-   { path: 'user', component : UserListComponent }
+   { path: 'user', component : UserListComponent },
+   { path: 'list', component : ListComponent }
 ];
 
 @NgModule({

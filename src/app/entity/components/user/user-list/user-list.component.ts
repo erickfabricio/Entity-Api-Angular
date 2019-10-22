@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, ViewChildren, AfterViewInit, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { UserModel } from 'src/app/entity/models/user.model';
-import { EntityApiService } from 'src/app/entity/services/entity.api.service';
+import { EntityService } from 'src/app/entity/services/entity.service';
 import { UserCrudComponent } from '../user-crud/user-crud.component';
 
 @Component({
@@ -20,14 +20,14 @@ export class UserListComponent implements OnInit {
   modal: BsModalRef;
   user: UserModel;
 
-  constructor(private entityApiService: EntityApiService, private modalService: BsModalService) { }
+  constructor(private entityService: EntityService, private modalService: BsModalService) { }
 
   ngOnInit() {
     this.find();
   }
 
   find() {
-    this.entityApiService.find(this.entity)
+    this.entityService.find(this.entity)
       .subscribe(users => { console.log(users); this.users = <UserModel[]>users });
   }
 

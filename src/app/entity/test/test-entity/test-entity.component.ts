@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserModel } from '../../models/user.model';
-import { EntityApiService } from '../../services/entity.api.service';
+import { EntityService } from '../../services/entity.service';
 
 import { HttpClient } from '@angular/common/http';
 
@@ -16,7 +16,7 @@ export class TestEntityComponent implements OnInit {
   users: UserModel[];
   user: UserModel;
   
-  constructor(private entityApiService: EntityApiService) {  }
+  constructor(private entityService: EntityService) {  }
 
   enter(){
     console.log(this.entity);    
@@ -26,12 +26,12 @@ export class TestEntityComponent implements OnInit {
   }
 
   find() {
-    this.entityApiService.find(this.entity)
+    this.entityService.find(this.entity)
       .subscribe(users => { console.log(users); this.users = <UserModel[]>users });
   }
 
   findById() {    
-    this.entityApiService.findById(this.entity, this.id)
+    this.entityService.findById(this.entity, this.id)
       .subscribe(user => { console.log(user); this.user = <UserModel>user });
   }
 
