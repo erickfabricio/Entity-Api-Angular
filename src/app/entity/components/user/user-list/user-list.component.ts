@@ -23,9 +23,6 @@ export class UserListComponent implements OnInit {
   displayedColumns: string[];
   dataSource: MatTableDataSource<UserModel>;
 
-  filterFormControl: FormControl;
-  matcher: MyErrorStateMatcher;
-
   //List
   users: UserModel[];
 
@@ -38,18 +35,13 @@ export class UserListComponent implements OnInit {
 
   constructor(private entityService: EntityService, private modalService: BsModalService) { }
 
-  ngOnInit() {
-    this.filterFormControl = new FormControl('', [Validators.required]);
-    this.matcher = new MyErrorStateMatcher();
-    
-    this.alerts = [];
-
-    this.displayedColumns = ['#', 'id', 'name', 'age', 'mail', 'password', 'description', 'state', 'read', 'update', 'delete'];
+  ngOnInit() {            
+    this.displayedColumns = ['#', 'id', 'name', 'age', 'mail', 'password', 'description', 'state', 'date', 'read', 'update', 'delete'];
     this.dataSource = new MatTableDataSource<UserModel>();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.find();
-
+    this.alerts = [];
   }
 
   find() {
@@ -105,7 +97,7 @@ export class UserListComponent implements OnInit {
     });
 
   }
-
+  
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }

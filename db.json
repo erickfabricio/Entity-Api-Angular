@@ -1,13 +1,14 @@
 {
   "users": [
     {
-      "name": "Erick",
+      "name": "Erick2",
       "age": 24,
       "mail": "mai@erickfabricio.com",
       "password": "abcd1234",
       "description": "The best",
       "state": "A",
-      "id": 1
+      "id": 1,
+      "date": "2013-12-12T06:00:00.000Z"
     }
   ],
   "products": [

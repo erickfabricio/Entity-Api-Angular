@@ -1,8 +1,9 @@
-.example-container {
+.input-container {
   display: flex;
   flex-direction: column;
+  margin: 20px;
 }
 
-.example-container > * {
+.input-container > * {
   width: 100%;
 }

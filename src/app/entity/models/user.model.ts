@@ -11,9 +11,10 @@ export class UserModel extends EntityModel {
     public password: string;
     public description: string;
     public state: string;
+    public date: Date;
 
     constructor() {
-        super();
+        super();        
     }
 
 }

@@ -2,9 +2,9 @@
 
 <div class="modal-header">
     <h4 class="modal-title pull-left">{{title}}</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modal.hide()">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modal.hide()" title="Close">
         <span aria-hidden="true">&times;</span>
-    </button>
+    </button>    
 </div>
 
 <!-- BODY -->
@@ -12,63 +12,81 @@
 <div class="modal-body">
 
     <form [formGroup]="form">
-
+    
         <!-- id -->
-        <div class="example-container">
-            <mat-form-field *ngIf="visibleControls.id">
+        <div class="input-container" *ngIf="visibleControls.id">
+            <mat-form-field>
                 <input matInput placeholder="Id" type="text" formControlName="id">
             </mat-form-field>
         </div>
 
         <!-- name -->
-        <div class="example-container">
-            <mat-form-field *ngIf="visibleControls.name">
-                <input matInput placeholder="Name" type="text" formControlName="name">
+        <div class="input-container" *ngIf="visibleControls.name">
+            <mat-form-field>
+                <input matInput placeholder="Name" title="Name" #inputName type="text" formControlName="name" maxlength="30">
+                <mat-error *ngIf="form.get('name').invalid">{{getErrorMessageName()}}</mat-error>
+                <mat-hint align="end">{{inputName.value?.length || 0}}/30</mat-hint>
             </mat-form-field>
         </div>
 
         <!-- age -->
-        <div class="example-container">
-            <mat-form-field *ngIf="visibleControls.age">
-                <input matInput placeholder="Age" type="number" formControlName="age">
+        <div class="input-container" *ngIf="visibleControls.age">
+            <mat-form-field>
+                <input matInput placeholder="Age" title="Age" type="number" formControlName="age">
+                <mat-error *ngIf="form.get('age').invalid">{{getErrorMessageAge()}}</mat-error>
             </mat-form-field>
         </div>
 
         <!-- mail -->
-        <div class="example-container">
-            <mat-form-field *ngIf="visibleControls.mail">
-                <input matInput placeholder="Mail" type="text" formControlName="mail">
+        <div class="input-container" *ngIf="visibleControls.mail">
+            <mat-form-field>
+                <input matInput placeholder="Mail" title="Mail" type="text" formControlName="mail">
+                <mat-error *ngIf="form.get('mail').invalid">{{getErrorMessageMail()}}</mat-error>
             </mat-form-field>
         </div>
 
         <!-- password -->
-        <div class="example-container">
-            <mat-form-field *ngIf="visibleControls.password">
-                <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password">
-
+        <div class="input-container" *ngIf="visibleControls.password">
+            <mat-form-field>
+                <input matInput placeholder="Password" title="Password" [type]="hide ? 'password' : 'text'" formControlName="password">
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                     [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
+                <mat-error *ngIf="form.get('password').invalid">{{getErrorMessagePassword()}}</mat-error>
             </mat-form-field>
         </div>
 
-
-
         <!-- description -->
-        <div class="example-container">
-            <mat-form-field *ngIf="visibleControls.description">
-                <input matInput placeholder="Description" type="text" formControlName="description">
+        <div class="input-container" *ngIf="visibleControls.description">
+            <mat-form-field>
+                <textarea matInput placeholder="Description" title="Description" #inputDescription formControlName="description"
+                    maxlength="100"></textarea>
+                <mat-error *ngIf="form.get('description').invalid">{{getErrorMessageDescription()}}</mat-error>
+                <mat-hint align="end">{{inputDescription.value?.length || 0}}/100</mat-hint>
             </mat-form-field>
         </div>
 
         <!-- state -->
-        <div class="example-container">
-            <mat-form-field *ngIf="visibleControls.state">
-                <input matInput placeholder="State" type="text" formControlName="state">
+        <div class="input-container" *ngIf="visibleControls.state">
+            <mat-form-field>                
+                <mat-select placeholder="Select" title="State" formControlName="state">
+                    <mat-option value="option">Option...</mat-option>
+                    <mat-option value="A">Active</mat-option>
+                    <mat-option value="I">Inactive</mat-option>
+                </mat-select>
             </mat-form-field>
         </div>
 
+        <!-- date -->
+        <div class="input-container" *ngIf="visibleControls.date">
+            <mat-form-field class="bs-calendar-container">
+                <input matInput [matDatepicker]="picker" placeholder="Date" title="Date" formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        
     </form>
 
 </div>
