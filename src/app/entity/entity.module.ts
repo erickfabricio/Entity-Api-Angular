@@ -6,6 +6,7 @@ import { EntityRoutingModule } from './entity-routing.module';
 
 import { UserListComponent } from './components/user/user-list/user-list.component';
 import { UserCrudComponent } from './components/user/user-crud/user-crud.component';
+import { MaterialModule } from '../material.module';
 
 @NgModule({
   declarations: [UserListComponent, UserCrudComponent],
@@ -14,7 +15,8 @@ import { UserCrudComponent } from './components/user/user-crud/user-crud.compone
     EntityRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    MaterialModule
   ],
   exports: [
     
