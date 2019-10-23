@@ -6,6 +6,11 @@ export class UserModel extends EntityModel {
 
     public id: string;
     public name: string;
+    public age: number;
+    public mail: string;
+    public password: string;
+    public description: string;
+    public state: string;
 
     constructor() {
         super();

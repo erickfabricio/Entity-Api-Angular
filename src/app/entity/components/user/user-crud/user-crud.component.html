@@ -14,20 +14,59 @@
     <form [formGroup]="form">
 
         <!-- id -->
-        <div class="form-group row" *ngIf="visibleControls.id">
-            <label for="user-id" class="col-sm-2 col-form-label">id</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="user-id" formControlName="id" placeholder="id">
-            </div>
+        <div class="example-container">
+            <mat-form-field *ngIf="visibleControls.id">
+                <input matInput placeholder="Id" type="text" formControlName="id">
+            </mat-form-field>
         </div>
 
         <!-- name -->
-        <div class="form-group row" *ngIf="visibleControls.name">
-            <label for="user-name" class="col-sm-2 col-form-label">name</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="user-name" formControlName="name"
-                    placeholder="name">
-            </div>
+        <div class="example-container">
+            <mat-form-field *ngIf="visibleControls.name">
+                <input matInput placeholder="Name" type="text" formControlName="name">
+            </mat-form-field>
+        </div>
+
+        <!-- age -->
+        <div class="example-container">
+            <mat-form-field *ngIf="visibleControls.age">
+                <input matInput placeholder="Age" type="number" formControlName="age">
+            </mat-form-field>
+        </div>
+
+        <!-- mail -->
+        <div class="example-container">
+            <mat-form-field *ngIf="visibleControls.mail">
+                <input matInput placeholder="Mail" type="text" formControlName="mail">
+            </mat-form-field>
+        </div>
+
+        <!-- password -->
+        <div class="example-container">
+            <mat-form-field *ngIf="visibleControls.password">
+                <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password">
+
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+
+
+
+        <!-- description -->
+        <div class="example-container">
+            <mat-form-field *ngIf="visibleControls.description">
+                <input matInput placeholder="Description" type="text" formControlName="description">
+            </mat-form-field>
+        </div>
+
+        <!-- state -->
+        <div class="example-container">
+            <mat-form-field *ngIf="visibleControls.state">
+                <input matInput placeholder="State" type="text" formControlName="state">
+            </mat-form-field>
         </div>
 
     </form>
@@ -44,7 +83,7 @@
     </div>
 
     <div class="modal-footer" *ngSwitchCase="'READ'">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.hide()">Close</button>        
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.hide()">Close</button>
     </div>
 
     <div class="modal-footer" *ngSwitchCase="'UPDATE'">

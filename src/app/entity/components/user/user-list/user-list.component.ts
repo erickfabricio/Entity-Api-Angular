@@ -44,13 +44,11 @@ export class UserListComponent implements OnInit {
     
     this.alerts = [];
 
-    this.displayedColumns = ['#', 'id', 'name', 'read', 'update', 'delete'];
+    this.displayedColumns = ['#', 'id', 'name', 'age', 'mail', 'password', 'description', 'state', 'read', 'update', 'delete'];
     this.dataSource = new MatTableDataSource<UserModel>();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.find();
-
-
 
   }
 

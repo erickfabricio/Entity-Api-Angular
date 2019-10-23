@@ -1,16 +1,13 @@
 {
   "users": [
     {
-      "name": "Fabricio",
-      "id": 8
-    },
-    {
-      "name": "jjj",
-      "id": 9
-    },
-    {
-      "name": "asas",
-      "id": 10
+      "name": "Erick",
+      "age": 24,
+      "mail": "mai@erickfabricio.com",
+      "password": "abcd1234",
+      "description": "The best",
+      "state": "A",
+      "id": 1
     }
   ],
   "products": [
