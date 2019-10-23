@@ -7,6 +7,7 @@ import { EntityRoutingModule } from './entity-routing.module';
 import { UserListComponent } from './components/user/user-list/user-list.component';
 import { UserCrudComponent } from './components/user/user-crud/user-crud.component';
 import { MaterialModule } from '../material.module';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 @NgModule({
   declarations: [UserListComponent, UserCrudComponent],
@@ -16,7 +17,8 @@ import { MaterialModule } from '../material.module';
     FormsModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
-    MaterialModule
+    MaterialModule,
+    AlertModule.forRoot()
   ],
   exports: [
     

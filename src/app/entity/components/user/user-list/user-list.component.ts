@@ -6,6 +6,9 @@ import { UserCrudComponent } from '../user-crud/user-crud.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { FormControl, Validators } from '@angular/forms';
+import { MyErrorStateMatcher } from 'src/app/entity/models/error.validate.interface';
+import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
 
 @Component({
   selector: 'entity-user-list',
@@ -15,10 +18,13 @@ import { MatSort } from '@angular/material/sort';
 export class UserListComponent implements OnInit {
 
   //Filter
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   displayedColumns: string[];
-  dataSource:MatTableDataSource<UserModel>;
+  dataSource: MatTableDataSource<UserModel>;
+
+  filterFormControl: FormControl;
+  matcher: MyErrorStateMatcher;
 
   //List
   users: UserModel[];
@@ -27,14 +33,25 @@ export class UserListComponent implements OnInit {
   modal: BsModalRef;
   user: UserModel;
 
+  //Alert
+  alerts: any[];
+
   constructor(private entityService: EntityService, private modalService: BsModalService) { }
 
-  ngOnInit() {    
-    this.displayedColumns = ['id', 'name', 'read', 'update', 'delete'];
+  ngOnInit() {
+    this.filterFormControl = new FormControl('', [Validators.required]);
+    this.matcher = new MyErrorStateMatcher();
+    
+    this.alerts = [];
+
+    this.displayedColumns = ['#', 'id', 'name', 'read', 'update', 'delete'];
     this.dataSource = new MatTableDataSource<UserModel>();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.find();
+
+
+
   }
 
   find() {
@@ -43,7 +60,7 @@ export class UserListComponent implements OnInit {
   }
 
   showModalCrud(action: string, user: UserModel) {
-    
+
     //Show the modal according to the action
     this.modal = this.modalService.show(UserCrudComponent, {
       initialState: {
@@ -53,20 +70,50 @@ export class UserListComponent implements OnInit {
     });
 
     //Get the modal process
-    this.modal.content.isUpdateList.pipe().subscribe(isUpdate => {           
-      if(isUpdate){
+    this.modal.content.isUpdateList.pipe().subscribe(isUpdate => {
+      if (isUpdate) {
+
+        //Update List
         this.find();
-        /*
-        if(action == "CREATE"){
-          this.applyFilter(this.modal.content.user.name);
-        }*/
-      }      
+
+        //Show Alert
+        switch (action) {
+          case "CREATE":            
+            this.alerts.push({
+              type: 'success',
+              msg: `New user: ${this.modal.content.user.id}`,
+              timeout: 5000
+            });
+
+            break;
+          case "UPDATE": // Aqui no se llega por el Emitter
+            console.log("aqui");
+            this.alerts.push({
+              type: 'warning',
+              msg: `Update user: ${this.modal.content.user.id}`,
+              timeout: 5000
+            });
+            break;
+          case "DELETE":
+            this.alerts.push({
+              type: 'danger',
+              msg: `Delete user: ${this.modal.content.user.id}`,
+              timeout: 5000
+            });
+            break;
+        }
+
+      }
     });
-    
+
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  
+
+  onClosedAlert(dismissedAlert: AlertComponent): void {
+    this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);
+  }
+
 }
