@@ -8,9 +8,11 @@ import { UserListComponent } from './components/user/user-list/user-list.compone
 import { UserCrudComponent } from './components/user/user-crud/user-crud.component';
 import { MaterialModule } from '../material.module';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { ProductListComponent } from './components/product/product-list/product-list.component';
+import { ProductCrudComponent } from './components/product/product-crud/product-crud.component';
 
 @NgModule({
-  declarations: [UserListComponent, UserCrudComponent],
+  declarations: [UserListComponent, UserCrudComponent, ProductListComponent, ProductCrudComponent],
   imports: [
     CommonModule,
     EntityRoutingModule,
@@ -21,8 +23,8 @@ import { AlertModule } from 'ngx-bootstrap/alert';
     AlertModule.forRoot()
   ],
   exports: [
-    
+    UserListComponent, UserCrudComponent, ProductListComponent, ProductCrudComponent
   ],
-  entryComponents: [UserCrudComponent]
+  entryComponents: [UserCrudComponent, ProductCrudComponent]
 })
 export class EntityModule { }

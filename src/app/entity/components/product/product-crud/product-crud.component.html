@@ -1,0 +1,52 @@
+<!-- HEADER -->
+<h4 class="modal-title pull-left">{{title}}</h4>
+
+<!-- BODY -->
+
+<form [formGroup]="form">
+
+    <!-- id -->
+    <div class="input-container" *ngIf="visibleControls.id">
+        <mat-form-field>
+            <input matInput placeholder="Id" type="text" formControlName="id">
+        </mat-form-field>
+    </div>
+
+    <!-- name -->
+    <div class="input-container" *ngIf="visibleControls.name">
+        <mat-form-field>
+            <input matInput placeholder="Name" title="Name" #inputName type="text" formControlName="name"
+                maxlength="30">
+            <mat-error *ngIf="form.get('name').invalid">{{getErrorMessageName()}}</mat-error>
+            <mat-hint align="end">{{inputName.value?.length || 0}}/30</mat-hint>
+        </mat-form-field>
+    </div>
+
+</form>
+
+
+
+<!-- FOOTER 
+
+<div [ngSwitch]="action">
+
+    <div class="modal-footer" *ngSwitchCase="'CREATE'">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.hide()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onCreate()">Create</button>
+    </div>
+
+    <div class="modal-footer" *ngSwitchCase="'READ'">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.hide()">Close</button>
+    </div>
+
+    <div class="modal-footer" *ngSwitchCase="'UPDATE'">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.hide()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onUpdate()">Update</button>
+    </div>
+
+    <div class="modal-footer" *ngSwitchCase="'DELETE'">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.hide()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onDelete()">Delete</button>
+    </div>
+
+</div>-->

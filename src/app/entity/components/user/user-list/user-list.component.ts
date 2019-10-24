@@ -6,8 +6,6 @@ import { UserCrudComponent } from '../user-crud/user-crud.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { FormControl, Validators } from '@angular/forms';
-import { MyErrorStateMatcher } from 'src/app/entity/models/error.validate.interface';
 import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
 
 @Component({

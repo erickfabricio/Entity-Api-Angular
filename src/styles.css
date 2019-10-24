@@ -1,4 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* List */
+
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    /*font-size: 14px;*/
+    width: 100%;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+/* CRUD */
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.input-container>* {
+    width: 100%;
+}

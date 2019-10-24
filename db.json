@@ -14,11 +14,11 @@
   "products": [
     {
       "id": 1,
-      "description": "TV"
+      "name": "TV"
     },
     {
       "id": 2,
-      "description": "Smartphone"
+      "name": "Smartphone"
     }
   ]
 }
