@@ -10,13 +10,7 @@ export class ListComponent implements OnInit {
 
   user: UserModel;
 
-  @Output() evento = new EventEmitter<any>();
-
-  emitirEvento(action: string, user: UserModel) {    
-    return this.evento.emit({action, user});
-  }
-
-  
+  @Output() event = new EventEmitter<any>();
 
   constructor() { }
 
@@ -24,6 +18,10 @@ export class ListComponent implements OnInit {
     this.user = new UserModel();
     this.user.id = "1";
     this.user.name = "Erick";
+  }
+
+  emitirEvento(action: string, user: UserModel) {    
+    return this.event.emit({action, user});
   }
 
 }

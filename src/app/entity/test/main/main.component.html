@@ -1,7 +1,7 @@
-<mat-tab-group #tabGroup (selectedTabChange)="onSequenceChangeEvent($event)">
+<mat-tab-group #tabGroup (selectedTabChange)="onChangeTab($event)">
 
     <mat-tab label="List" #tabList> 
-        <list #list></list>     
+        <list #list></list>
     </mat-tab>
     
     <mat-tab label="" #tabCrud disabled> 

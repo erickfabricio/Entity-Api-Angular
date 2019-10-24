@@ -10,48 +10,41 @@ import { CrudComponent } from '../crud/crud.component';
 })
 export class MainComponent implements OnInit {
 
-  @ViewChild("tabGroup", {static:true}) tabGroup;
-  
+  @ViewChild("tabGroup", {static:true}) tabGroup;  
   @ViewChild("tabList", {static:true}) tabList;
-  @ViewChild("list", {static:true}) list: ListComponent;
-  
+  @ViewChild("list", {static:true}) list: ListComponent;  
   @ViewChild("tabCrud", {static:true}) tabCrud;
   @ViewChild("crud", {static:true}) crud: CrudComponent;
-
-
-  //@ViewChild(ListComponent, {static: true}) list: ListComponent;
-  //@ViewChild(CrudComponent, {static: false}) crud: CrudComponent;
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.list);
-    
-    //Capturar evento 
-    this.list.evento.pipe().subscribe(data => {
-      console.log("Capturar evento del hijo data: " + data);
-
+    this.captureEvent();    
+  }
+  
+  captureEvent(){    
+    this.list.event.pipe().subscribe(data => {
+      //Data      
       console.log(data.action);
       console.log(data.user);
-
-
-      //Cambiar de tag
+      
+      //Send data to CRUD
       this.crud.action = data.action;
       this.crud.user = data.user;
-
-      //Cambiar de tag
+      
+      //Change and enable tag
       this.tabCrud.textLabel = "Crud " + data.action;
-      this.tabGroup.selectedIndex = 1      
-
+      this.tabCrud.disabled = false;
+      this.tabGroup.selectedIndex = 1
     });
-
   }
   
-  
-  onSequenceChangeEvent(event: MatTabChangeEvent) {
+  onChangeTab(event: MatTabChangeEvent) {
+    console.log("Tag change:" + event.tab.textLabel);
     if(this.tabGroup.selectedIndex == 0){
       this.tabCrud.textLabel = "";
-    }
-    console.log(event.tab.textLabel);
+      this.tabCrud.disabled = true;
+    }    
   }
+
 }
