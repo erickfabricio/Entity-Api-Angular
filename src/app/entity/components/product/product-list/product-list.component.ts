@@ -7,6 +7,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
+import { MatTabChangeEvent } from '@angular/material/tabs';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'entity-product-list',
@@ -23,8 +25,6 @@ export class ProductListComponent implements OnInit {
 
   //List
   products: ProductModel[];
-
-  //CRUD  
   product: ProductModel;
   
   //Alert
@@ -38,7 +38,7 @@ export class ProductListComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.alerts = [];
-    this.find();   
+    this.find();
   }
 
   find() {

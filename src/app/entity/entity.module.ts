@@ -10,9 +10,12 @@ import { MaterialModule } from '../material.module';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ProductListComponent } from './components/product/product-list/product-list.component';
 import { ProductCrudComponent } from './components/product/product-crud/product-crud.component';
+import { MainComponent } from './test/main/main.component';
+import { ListComponent } from './test/list/list.component';
+import { CrudComponent } from './test/crud/crud.component';
 
 @NgModule({
-  declarations: [UserListComponent, UserCrudComponent, ProductListComponent, ProductCrudComponent],
+  declarations: [UserListComponent, UserCrudComponent, ProductListComponent, ProductCrudComponent, MainComponent, ListComponent, CrudComponent],
   imports: [
     CommonModule,
     EntityRoutingModule,
@@ -25,6 +28,6 @@ import { ProductCrudComponent } from './components/product/product-crud/product-
   exports: [
     UserListComponent, UserCrudComponent, ProductListComponent, ProductCrudComponent
   ],
-  entryComponents: [UserCrudComponent, ProductCrudComponent]
+  entryComponents: [UserCrudComponent]
 })
 export class EntityModule { }

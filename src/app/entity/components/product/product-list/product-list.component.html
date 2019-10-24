@@ -1,4 +1,3 @@
-
 <div class="container">
 
     <!-- Alert -->
@@ -10,7 +9,7 @@
 
     <!-- New product -->
     <h1>Products
-        <a [routerLink]="['/product', 'create']" class="btn btn-outline-success">Create</a>
+        <a [routerLink]="['/product/create']" class="btn btn-outline-success">Create</a>
     </h1>
 
     <!-- Filter -->
@@ -78,3 +77,8 @@
     </div>
 
 </div>
+
+
+<!--
+<entity-product-crud [action]="'READ'" [product]="product"></entity-product-crud>
+-->
