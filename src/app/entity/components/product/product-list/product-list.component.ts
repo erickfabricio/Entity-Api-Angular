@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ProductModel } from 'src/app/entity/models/product.model';
 import { EntityService } from 'src/app/entity/services/entity.service';
@@ -52,6 +52,12 @@ export class ProductListComponent implements OnInit {
 
   onClosedAlert(dismissedAlert: AlertComponent): void {
     this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);
+  }
+
+  //** */
+  @Output() event = new EventEmitter<any>();
+  eventEmit(action: string, product: ProductModel) {    
+    return this.event.emit({action, product});
   }
 
 }

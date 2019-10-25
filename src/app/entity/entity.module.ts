@@ -13,9 +13,12 @@ import { ProductCrudComponent } from './components/product/product-crud/product-
 import { MainComponent } from './test/main/main.component';
 import { ListComponent } from './test/list/list.component';
 import { CrudComponent } from './test/crud/crud.component';
+import { ProductMainComponent } from './components/product/product-main/product-main.component';
+import { UserMainComponent } from './components/user/user-main/user-main.component';
+import { EntityMainComponent } from './components/entity-main/entity-main.component';
 
 @NgModule({
-  declarations: [UserListComponent, UserCrudComponent, ProductListComponent, ProductCrudComponent, MainComponent, ListComponent, CrudComponent],
+  declarations: [UserListComponent, UserCrudComponent, ProductListComponent, ProductCrudComponent, MainComponent, ListComponent, CrudComponent, ProductMainComponent, UserMainComponent, EntityMainComponent],
   imports: [
     CommonModule,
     EntityRoutingModule,

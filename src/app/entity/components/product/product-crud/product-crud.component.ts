@@ -14,7 +14,6 @@ export class ProductCrudComponent implements OnInit {
 
   //CRUD
   action: string;
-  id: string;
   product: ProductModel;
 
   //Form
@@ -22,53 +21,46 @@ export class ProductCrudComponent implements OnInit {
   form: FormGroup;
   visibleControls;
 
-  constructor(private router: ActivatedRoute, private entityService: EntityService) { }
+  constructor(private entityService: EntityService) { }
 
   ngOnInit() {
 
-    //Caso - Create
-    this.form = new FormGroup({
-      id: new FormControl(''),
-      name: new FormControl('')
-    });
+    this.title = "CRUD";
 
-    //Default
     this.visibleControls = {
       id: true,
       name: true
-    };
-        
-    this.action = this.router.snapshot.params.action;
-    this.id = this.router.snapshot.params.id;
-    console.log(this.action + "->" + this.id);
-
-    //Action
-    switch (this.action) {
-      case "create":
-        this.create();
-        break;
-      case "read":
-        this.read();
-        break;
-      case "update":
-        this.update();
-        break;
-      case "delete":
-        this.delete();
-        break;
     }
+
+    this.form = new FormGroup({
+      id: new FormControl(''),
+      name: new FormControl('', [Validators.required, Validators.minLength(5)])
+    });
 
   }
 
-  findProductById() {
-    this.entityService.findById(ProductModel.entity, this.id)
-      .subscribe(product => { this.product = <ProductModel>product; console.log(this.product) });
+  show() {
+    //Action
+    switch (this.action) {
+      case "CREATE":
+        this.create();
+        break;
+      case "READ":
+        this.read();
+        break;
+      case "UPDATE":
+        this.update();
+        break;
+      case "DELETE":
+        this.delete();
+        break;
+    }
   }
 
   //************ FORM ************//
 
   create() {
-    this.title = "Create product";
+    this.title = "Create product";    
     this.form = new FormGroup({
       id: new FormControl(''),
       name: new FormControl('', [Validators.required, Validators.minLength(5)])
@@ -77,41 +69,26 @@ export class ProductCrudComponent implements OnInit {
   }
 
   read() {
-    this.title = "Read product";
-    this.entityService.findById(ProductModel.entity, this.id).subscribe(product => {
-      this.product = <ProductModel>product;
-      console.log(this.product);
-      //**** READ ****/
-      this.form = new FormGroup({
-        id: new FormControl({ value: this.product.id, disabled: true }),
-        name: new FormControl({ value: this.product.name, disabled: true })
-      });
+    this.title = "Read product";    
+    this.form = new FormGroup({
+      id: new FormControl({ value: this.product.id, disabled: true }),
+      name: new FormControl({ value: this.product.name, disabled: true })
     });
   }
 
   update() {
     this.title = "Update product";
-    this.entityService.findById(ProductModel.entity, this.id).subscribe(product => {
-      this.product = <ProductModel>product;
-      console.log(this.product);
-      //**** UPDATE ****/
-      this.form = new FormGroup({
-        id: new FormControl({ value: this.product.id, disabled: true }),
-        name: new FormControl(this.product.name, [Validators.required])
-      });
+    this.form = new FormGroup({
+      id: new FormControl({ value: this.product.id, disabled: true }),
+      name: new FormControl(this.product.name, [Validators.required])
     });
   }
 
   delete() {
     this.title = "Delete product";
-    this.entityService.findById(ProductModel.entity, this.id).subscribe(product => {
-      this.product = <ProductModel>product;
-      console.log(this.product);
-      //**** DELETE ****/
-      this.form = new FormGroup({
-        id: new FormControl({ value: this.product.id, disabled: true }),
-        name: new FormControl({ value: this.product.name, disabled: true })
-      });
+    this.form = new FormGroup({
+      id: new FormControl({ value: this.product.id, disabled: true }),
+      name: new FormControl({ value: this.product.name, disabled: true })
     });
   }
 

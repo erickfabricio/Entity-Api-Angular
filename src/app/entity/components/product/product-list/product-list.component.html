@@ -9,7 +9,7 @@
 
     <!-- New product -->
     <h1>Products
-        <a [routerLink]="['/product/create']" class="btn btn-outline-success">Create</a>
+        <button type="button" class="btn btn-outline-success" (click)="eventEmit('CREATE')">Create</button>
     </h1>
 
     <!-- Filter -->
@@ -44,24 +44,27 @@
             <!-- Read Column -->
             <ng-container matColumnDef="read">
                 <th mat-header-cell *matHeaderCellDef> Read </th>
-                <td mat-cell *matCellDef="let product">
-                    <a [routerLink]="['/product', 'read', product.id]" class="btn btn-outline-primary">Read</a>
+                <td mat-cell *matCellDef="let product">                    
+                    <button type="button" class="btn btn-outline-primary"
+                        (click)="eventEmit('READ', product)">Read</button>
                 </td>
             </ng-container>
 
             <!-- Update Column -->
             <ng-container matColumnDef="update">
                 <th mat-header-cell *matHeaderCellDef> Update </th>
-                <td mat-cell *matCellDef="let product">
-                    <a [routerLink]="['/product', 'update', product.id]" class="btn btn-outline-warning">Update</a>
+                <td mat-cell *matCellDef="let product">                    
+                    <button type="button" class="btn btn-outline-warning"
+                        (click)="eventEmit('UPDATE', product)">Update</button>
                 </td>
             </ng-container>
 
             <!-- Delete Column -->
             <ng-container matColumnDef="delete">
                 <th mat-header-cell *matHeaderCellDef> Delete </th>
-                <td mat-cell *matCellDef="let product">
-                    <a [routerLink]="['/product', 'delete', product.id]" class="btn btn-outline-danger">Delete</a>
+                <td mat-cell *matCellDef="let product">                    
+                    <button type="button" class="btn btn-outline-danger"
+                        (click)="eventEmit('DELETE', product)">Delete</button>
                 </td>
             </ng-container>
 

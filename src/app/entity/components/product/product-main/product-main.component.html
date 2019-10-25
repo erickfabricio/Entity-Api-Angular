@@ -1,0 +1,11 @@
+<mat-tab-group #tabGroup (selectedTabChange)="onChangeTab($event)">
+
+    <mat-tab label="List" #tabList> 
+        <entity-product-list #list></entity-product-list>
+    </mat-tab>
+    
+    <mat-tab label="" #tabCrud disabled> 
+        <entity-product-crud #crud></entity-product-crud> 
+    </mat-tab>
+
+</mat-tab-group>
