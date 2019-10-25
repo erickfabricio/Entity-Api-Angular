@@ -29,7 +29,7 @@ export class ProductListComponent implements OnInit {
   constructor(private entityService: EntityService) { }
 
   ngOnInit() {
-    this.displayedColumns = ['#', 'id', 'name', 'read', 'update', 'delete'];
+    this.displayedColumns = ['#', 'id', 'name'];
     this.dataSource = new MatTableDataSource<ProductModel>();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -52,7 +52,7 @@ export class ProductListComponent implements OnInit {
 
   //************ EVENTS ************//
   @Output() eventCrud = new EventEmitter<any>();
-  eventCrudEmitter(action: string, product: ProductModel) {    
+  eventCrudEmitter(action: string, product: ProductModel) {
     return this.eventCrud.emit({action, product});
   }
 
