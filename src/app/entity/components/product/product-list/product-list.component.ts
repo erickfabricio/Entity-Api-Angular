@@ -1,14 +1,10 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { ProductModel } from 'src/app/entity/models/product.model';
-import { EntityService } from 'src/app/entity/services/entity.service';
-import { ProductCrudComponent } from '../product-crud/product-crud.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
-import { MatTabChangeEvent } from '@angular/material/tabs';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ProductModel } from 'src/app/entity/models/product.model';
+import { EntityService } from 'src/app/entity/services/entity.service';
 
 @Component({
   selector: 'entity-product-list',

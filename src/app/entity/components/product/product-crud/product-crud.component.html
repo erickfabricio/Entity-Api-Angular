@@ -1,37 +1,42 @@
-<div class="container">
+<div class="div-crud container">
 
     <!-- HEADER -->
-    <div class="div-container-crud">
+    <div class="div-crud-header">
         <h4>{{title}}
             <span [ngSwitch]="action">
-                <button *ngSwitchCase="'CREATE'" type="button" class="btn btn-outline-success" (click)="onCreate()">Create</button>                
-                <button *ngSwitchCase="'UPDATE'" type="button" class="btn btn-outline-warning" (click)="onUpdate()">Update</button>
-                <button *ngSwitchCase="'DELETE'" type="button" class="btn btn-outline-danger" (click)="onDelete()">Delete</button>
+                <button *ngSwitchCase="'CREATE'" type="button" class="btn btn-outline-success"
+                    (click)="onCreate()">Create</button>
+                <button *ngSwitchCase="'UPDATE'" type="button" class="btn btn-outline-warning"
+                    (click)="onUpdate()">Update</button>
+                <button *ngSwitchCase="'DELETE'" type="button" class="btn btn-outline-danger"
+                    (click)="onDelete()">Delete</button>
             </span>
         </h4>
     </div>
 
     <!-- BODY -->
+    <div class="div-crud-form">
+        <form [formGroup]="form">
 
-    <form [formGroup]="form">
+            <!-- id -->
+            <div class="div-crud-form-input input-container" *ngIf="visibleControls.id">
+                <mat-form-field>
+                    <input matInput placeholder="Id" type="text" formControlName="id">
+                </mat-form-field>
+            </div>
 
-        <!-- id -->
-        <div class="input-container" *ngIf="visibleControls.id">
-            <mat-form-field>
-                <input matInput placeholder="Id" type="text" formControlName="id">
-            </mat-form-field>
-        </div>
+            <!-- name -->
+            <div class="div-crud-form-input input-container" *ngIf="visibleControls.name">
+                <mat-form-field>
+                    <input matInput placeholder="Name" title="Name" #inputName type="text" formControlName="name"
+                        maxlength="30" >
+                    <mat-error *ngIf="form.get('name').invalid">{{getErrorMessageName()}}</mat-error>
+                    <mat-hint align="end">{{inputName.value?.length || 0}}/30</mat-hint>
+                </mat-form-field>
+            </div>
 
-        <!-- name -->
-        <div class="input-container" *ngIf="visibleControls.name">
-            <mat-form-field>
-                <input matInput placeholder="Name" title="Name" #inputName type="text" formControlName="name"
-                    maxlength="30">
-                <mat-error *ngIf="form.get('name').invalid">{{getErrorMessageName()}}</mat-error>
-                <mat-hint align="end">{{inputName.value?.length || 0}}/30</mat-hint>
-            </mat-form-field>
-        </div>
+        </form>
+    </div>
 
-    </form>
 
 </div>

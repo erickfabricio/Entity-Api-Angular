@@ -1,1 +1,7 @@
+.div-list-header {
+    text-align: center;
+}
 
+::ng-deep .info-tooltip {       
+    background: #000000;
+}
