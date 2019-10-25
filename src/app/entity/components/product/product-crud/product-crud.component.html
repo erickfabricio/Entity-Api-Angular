@@ -1,8 +1,15 @@
 <div class="container">
 
     <!-- HEADER -->
-
-    <h4 class="modal-title pull-left">{{title}}</h4>
+    <div class="div-container-crud">
+        <h4>{{title}}
+            <span [ngSwitch]="action">
+                <button *ngSwitchCase="'CREATE'" type="button" class="btn btn-outline-success" (click)="onCreate()">Create</button>                
+                <button *ngSwitchCase="'UPDATE'" type="button" class="btn btn-outline-warning" (click)="onUpdate()">Update</button>
+                <button *ngSwitchCase="'DELETE'" type="button" class="btn btn-outline-danger" (click)="onDelete()">Delete</button>
+            </span>
+        </h4>
+    </div>
 
     <!-- BODY -->
 
@@ -27,26 +34,4 @@
 
     </form>
 
-
-    <!-- FOOTER -->
-
-    <div [ngSwitch]="action">
-
-        <div *ngSwitchCase="'create'">
-            <button type="button" class="btn btn-primary" (click)="onCreate()">Create</button>
-        </div>
-
-        <div *ngSwitchCase="'read'">
-            <button type="button" class="btn btn-secondary">Close</button>
-        </div>
-
-        <div *ngSwitchCase="'update'">
-            <button type="button" class="btn btn-primary" (click)="onUpdate()">Update</button>
-        </div>
-
-        <div *ngSwitchCase="'delete'">
-            <button type="button" class="btn btn-primary" (click)="onDelete()">Delete</button>
-        </div>
-
-    </div>
 </div>

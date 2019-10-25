@@ -74,6 +74,10 @@ export class ProductCrudComponent implements OnInit {
       id: new FormControl({ value: this.product.id, disabled: true }),
       name: new FormControl({ value: this.product.name, disabled: true })
     });
+    this.visibleControls = {
+      id: true,
+      name: true
+    }
   }
 
   update() {
@@ -82,6 +86,10 @@ export class ProductCrudComponent implements OnInit {
       id: new FormControl({ value: this.product.id, disabled: true }),
       name: new FormControl(this.product.name, [Validators.required])
     });
+    this.visibleControls = {
+      id: true,
+      name: true
+    }
   }
 
   delete() {
@@ -90,6 +98,10 @@ export class ProductCrudComponent implements OnInit {
       id: new FormControl({ value: this.product.id, disabled: true }),
       name: new FormControl({ value: this.product.name, disabled: true })
     });
+    this.visibleControls = {
+      id: true,
+      name: true
+    }
   }
 
   //************ ACTIONS OF FORM ************//
@@ -105,7 +117,7 @@ export class ProductCrudComponent implements OnInit {
 
       //Api 
       this.entityService.save(ProductModel.entity, this.product)
-        .subscribe(product => { console.log("New product"); this.product = <ProductModel>product });
+        .subscribe(product => { console.log("New product"); this.product = <ProductModel>product; this.eventUpdateListEmitter(true) });
 
     } else {
       alert("Invalid form");
@@ -132,7 +144,7 @@ export class ProductCrudComponent implements OnInit {
   onDelete() {
     //Api
     this.entityService.remove(ProductModel.entity, this.product.id)
-      .subscribe(product => { this.product = <ProductModel>product; console.log("Delete product") });
+      .subscribe(product => { this.product = <ProductModel>product; console.log("Delete product"); console.log(this.product); this.eventUpdateListEmitter(true) });
   }
 
   //************ FORM VIDATION ************//
@@ -144,6 +156,15 @@ export class ProductCrudComponent implements OnInit {
     if (this.form.get('name').hasError('minlength')) {
       return 'Minimum length is 5 characters';
     }
+  }
+
+  //************ EVENTS ************//
+  //Process
+  @Output() eventUpdateList = new EventEmitter<boolean>();  
+  eventUpdateListEmitter(isUpdate: boolean) {
+    if (isUpdate) {
+      this.eventUpdateList.emit(isUpdate);
+    }    
   }
 
 }

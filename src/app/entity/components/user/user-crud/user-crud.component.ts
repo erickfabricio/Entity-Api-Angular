@@ -222,7 +222,7 @@ export class UserCrudComponent implements OnInit {
     }
   }
 
-  //************ UTIL FOR LIST ************//
+  //************ EVENTS ************//  
 
   updateList(isUpdate: boolean) {
     if (isUpdate) {

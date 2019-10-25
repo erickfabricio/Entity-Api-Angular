@@ -54,10 +54,10 @@ export class ProductListComponent implements OnInit {
     this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);
   }
 
-  //** */
-  @Output() event = new EventEmitter<any>();
-  eventEmit(action: string, product: ProductModel) {    
-    return this.event.emit({action, product});
+  //************ EVENTS ************//
+  @Output() eventCrud = new EventEmitter<any>();
+  eventCrudEmitter(action: string, product: ProductModel) {    
+    return this.eventCrud.emit({action, product});
   }
 
 }

@@ -35,3 +35,10 @@ th.mat-sort-header-sorted {
 .input-container>* {
     width: 100%;
 }
+
+/* TAG */
+.container-mat-tab {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}

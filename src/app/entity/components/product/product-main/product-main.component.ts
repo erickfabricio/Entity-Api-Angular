@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { MatTabChangeEvent, MatTabNav } from '@angular/material/tabs';
 import { ProductListComponent } from '../product-list/product-list.component';
 import { ProductCrudComponent } from '../product-crud/product-crud.component';
+import { AlertComponent } from 'ngx-bootstrap/alert/public_api';
 
 
 @Component({
@@ -11,42 +12,88 @@ import { ProductCrudComponent } from '../product-crud/product-crud.component';
 })
 export class ProductMainComponent implements OnInit {
 
-  @ViewChild("tabGroup", {static:true}) tabGroup;  
-  @ViewChild("tabList", {static:true}) tabList;
-  @ViewChild("list", {static:true}) list: ProductListComponent;  
-  @ViewChild("tabCrud", {static:true}) tabCrud;
-  @ViewChild("crud", {static:true}) crud: ProductCrudComponent;
+  @ViewChild("tabGroup", { static: true }) tabGroup;
+  @ViewChild("tabList", { static: true }) tabList;
+  @ViewChild("list", { static: true }) list: ProductListComponent;
+  @ViewChild("tabCrud", { static: true }) tabCrud;
+  @ViewChild("crud", { static: true }) crud: ProductCrudComponent;
+
+  //Alert
+  alerts: any[];
 
   constructor() { }
 
   ngOnInit() {
-    this.captureEvent();    
+    this.captureEventList();
+    this.captureEventCrud();
+    this.alerts = [];
   }
-  
-  captureEvent(){    
-    this.list.event.pipe().subscribe(data => {
+
+  captureEventList() {
+    this.list.eventCrud.pipe().subscribe(data => {
       //Data      
       console.log(data.action);
       console.log(data.product);
-      
+
       //Send data to CRUD
       this.crud.action = data.action;
       this.crud.product = data.product;
       this.crud.show();
-      
+
       //Change and enable tag
       this.tabCrud.textLabel = "Crud " + data.action;
       this.tabCrud.disabled = false;
-      this.tabGroup.selectedIndex = 1
+      this.tabGroup.selectedIndex = 1;
     });
   }
-  
+
+  captureEventCrud() {
+    this.crud.eventUpdateList.pipe().subscribe(isUpdateList => {
+      //Data
+      console.log("Update list:" + isUpdateList);
+      if (isUpdateList) {
+        this.list.find();
+      }
+      //Show view and alert
+      switch (this.crud.action) {
+        case "CREATE":
+          this.alerts.push({
+            type: 'success',
+            msg: `New product: ${this.crud.product.id}`,
+            timeout: 5000
+          });
+          break;
+        case "READ":
+          break;
+        case "UPDATE":
+            this.alerts.push({
+              type: 'warning',
+              msg: `Update product: ${this.crud.product.id}`,
+              timeout: 5000
+            });
+          break;
+        case "DELETE":
+            this.alerts.push({
+              type: 'danger',
+              msg: `Delete product: ${this.crud.product.id}`,
+              timeout: 5000
+            });
+            this.tabGroup.selectedIndex = 0;
+          break;
+      }
+    });
+  }
+
   onChangeTab(event: MatTabChangeEvent) {
     console.log("Tag change:" + event.tab.textLabel);
-    if(this.tabGroup.selectedIndex == 0){
+    if (this.tabGroup.selectedIndex == 0) {
       this.tabCrud.textLabel = "";
       this.tabCrud.disabled = true;
-    }    
+    }
+  }
+
+  onClosedAlert(dismissedAlert: AlertComponent): void {
+    this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);
   }
 
 }

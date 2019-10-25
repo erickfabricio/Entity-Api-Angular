@@ -1,15 +1,8 @@
 <div class="container">
 
-    <!-- Alert -->
-    <div *ngFor="let alert of alerts">
-        <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" (onClosed)="onClosedAlert(alert)"
-            dismissible=true>{{ alert.msg }}
-        </alert>
-    </div>
-
     <!-- New product -->
     <h1>Products
-        <button type="button" class="btn btn-outline-success" (click)="eventEmit('CREATE')">Create</button>
+        <button type="button" class="btn btn-outline-success" (click)="eventCrudEmitter('CREATE')">Create</button>
     </h1>
 
     <!-- Filter -->
@@ -46,7 +39,7 @@
                 <th mat-header-cell *matHeaderCellDef> Read </th>
                 <td mat-cell *matCellDef="let product">                    
                     <button type="button" class="btn btn-outline-primary"
-                        (click)="eventEmit('READ', product)">Read</button>
+                        (click)="eventCrudEmitter('READ', product)">Read</button>
                 </td>
             </ng-container>
 
@@ -55,7 +48,7 @@
                 <th mat-header-cell *matHeaderCellDef> Update </th>
                 <td mat-cell *matCellDef="let product">                    
                     <button type="button" class="btn btn-outline-warning"
-                        (click)="eventEmit('UPDATE', product)">Update</button>
+                        (click)="eventCrudEmitter('UPDATE', product)">Update</button>
                 </td>
             </ng-container>
 
@@ -64,7 +57,7 @@
                 <th mat-header-cell *matHeaderCellDef> Delete </th>
                 <td mat-cell *matCellDef="let product">                    
                     <button type="button" class="btn btn-outline-danger"
-                        (click)="eventEmit('DELETE', product)">Delete</button>
+                        (click)="eventCrudEmitter('DELETE', product)">Delete</button>
                 </td>
             </ng-container>
 
