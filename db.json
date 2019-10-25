@@ -63,34 +63,6 @@
   ],
   "products": [
     {
-      "id": 8,
-      "name": "Smartphone2"
-    },
-    {
-      "name": "erick",
-      "id": 9
-    },
-    {
-      "name": "asdfghjk",
-      "id": 10
-    },
-    {
-      "name": "kkkkkkkkkk",
-      "id": 12
-    },
-    {
-      "name": "kkkkkkkkkk",
-      "id": 13
-    },
-    {
-      "name": "kkkkkkkkkk",
-      "id": 14
-    },
-    {
-      "name": "kkkkkkkkkk",
-      "id": 15
-    },
-    {
       "name": "kkkkkkkkkk",
       "id": 16
     },
@@ -101,6 +73,122 @@
     {
       "name": "klkkkkkk",
       "id": 18
+    },
+    {
+      "name": "Computadora",
+      "id": 20
+    },
+    {
+      "name": "Computadora",
+      "id": 21
+    },
+    {
+      "name": "Computadora",
+      "id": 22
+    },
+    {
+      "name": "Computadora",
+      "id": 23
+    },
+    {
+      "name": "Computadora",
+      "id": 24
+    },
+    {
+      "name": "Computadora",
+      "id": 25
+    },
+    {
+      "name": "Computadora",
+      "id": 26
+    },
+    {
+      "name": "Computadora",
+      "id": 27
+    },
+    {
+      "name": "Computadora",
+      "id": 28
+    },
+    {
+      "name": "Computadora",
+      "id": 29
+    },
+    {
+      "name": "Computadora",
+      "id": 30
+    },
+    {
+      "name": "Computadora",
+      "id": 31
+    },
+    {
+      "name": "Computadora",
+      "id": 32
+    },
+    {
+      "name": "Computadora",
+      "id": 33
+    },
+    {
+      "name": "asasa",
+      "id": 34
+    },
+    {
+      "name": "asasasas",
+      "id": 35
+    },
+    {
+      "name": "asasasas",
+      "id": 36
+    },
+    {
+      "name": "asasxasx",
+      "id": 37
+    },
+    {
+      "name": "asasxasx",
+      "id": 38
+    },
+    {
+      "name": "asasxasx",
+      "id": 39
+    },
+    {
+      "name": "asasasas",
+      "id": 40
+    },
+    {
+      "name": "Computadora",
+      "id": 41
+    },
+    {
+      "name": "Computadora",
+      "id": 42
+    },
+    {
+      "name": "Computadora",
+      "id": 43
+    },
+    {
+      "name": "asasasas",
+      "id": 44
+    },
+    {
+      "name": "asasasas",
+      "id": 45
+    },
+    {
+      "name": "Computadora",
+      "id": 46
+    },
+    {
+      "name": "Computadora",
+      "id": 47
+    },
+    {
+      "name": "Computadora",
+      "id": 48
     }
   ]
 }

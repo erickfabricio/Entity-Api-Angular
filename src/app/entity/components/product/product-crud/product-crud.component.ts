@@ -4,6 +4,7 @@ import { EntityService } from 'src/app/entity/services/entity.service';
 import { ProductModel } from 'src/app/entity/models/product.model';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 
 @Component({
   selector: 'entity-product-crud',
@@ -21,7 +22,7 @@ export class ProductCrudComponent implements OnInit {
   form: FormGroup;
   visibleControls;
 
-  constructor(private entityService: EntityService) { }
+  constructor(private entityService: EntityService, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
 
@@ -60,7 +61,7 @@ export class ProductCrudComponent implements OnInit {
   //************ FORM ************//
 
   create() {
-    this.title = "Create product";    
+    this.title = "Create product";
     this.form = new FormGroup({
       id: new FormControl(''),
       name: new FormControl('', [Validators.required, Validators.minLength(5)])
@@ -69,7 +70,7 @@ export class ProductCrudComponent implements OnInit {
   }
 
   read() {
-    this.title = "Read product";    
+    this.title = "Read product";
     this.form = new FormGroup({
       id: new FormControl({ value: this.product.id, disabled: true }),
       name: new FormControl({ value: this.product.name, disabled: true })
@@ -108,7 +109,6 @@ export class ProductCrudComponent implements OnInit {
 
   onCreate() {
     if (this.form.valid) {
-      console.log("Valid");
 
       //Assignment of values
       this.product = new ProductModel();
@@ -119,12 +119,19 @@ export class ProductCrudComponent implements OnInit {
       this.entityService.save(ProductModel.entity, this.product)
         .subscribe(product => { console.log("New product"); this.product = <ProductModel>product; this.eventUpdateListEmitter(true) });
 
+      //Succes
+      let succesMessage = "New product: " + this.product.name;
+      this.openSnackBar(succesMessage, "X", "snackbar-success");
+      this.form.reset();
     } else {
-      alert("Invalid form");
+      //Error
+      let errorMessage = "¡Invalid form, " + this.validateForm() + "!";
+      this.openSnackBar(errorMessage, "X", "snackbar-danger");
     }
   }
 
   onUpdate() {
+    //Check if there were changes
     if (this.form.valid) {
       console.log("Valid");
 
@@ -136,8 +143,13 @@ export class ProductCrudComponent implements OnInit {
       this.entityService.update(ProductModel.entity, this.product.id, this.product)
         .subscribe(product => { console.log("Update product"); this.product = <ProductModel>product });
 
+      //Succes
+      let succesMessage = "Update product: " + this.product.name;
+      this.openSnackBar(succesMessage, "X", "snackbar-success");
     } else {
-      alert("Invalid form");
+      //Error
+      let errorMessage = "¡Invalid form, " + this.validateForm() + "!";
+      this.openSnackBar(errorMessage, "X", "snackbar-danger");
     }
   }
 
@@ -145,9 +157,16 @@ export class ProductCrudComponent implements OnInit {
     //Api
     this.entityService.remove(ProductModel.entity, this.product.id)
       .subscribe(product => { this.product = <ProductModel>product; console.log("Delete product"); console.log(this.product); this.eventUpdateListEmitter(true) });
+    //Succes
+    let succesMessage = "Delete product: " + this.product.name;
+    this.openSnackBar(succesMessage, "X", "snackbar-success");
   }
 
   //************ FORM VIDATION ************//
+
+  validateForm() {
+    return this.getErrorMessageName();
+  }
 
   getErrorMessageName() {
     if (this.form.get('name').hasError('required')) {
@@ -158,13 +177,25 @@ export class ProductCrudComponent implements OnInit {
     }
   }
 
+  openSnackBar(message: string, action: string, style: string) {
+    this._snackBar.open(
+      message,
+      action,
+      {
+        duration: 2000,
+        verticalPosition: 'top',
+        panelClass: [style]
+      }
+    );
+  }
+
   //************ EVENTS ************//
   //Process
-  @Output() eventUpdateList = new EventEmitter<boolean>();  
+  @Output() eventUpdateList = new EventEmitter<boolean>();
   eventUpdateListEmitter(isUpdate: boolean) {
     if (isUpdate) {
       this.eventUpdateList.emit(isUpdate);
-    }    
+    }
   }
 
 }

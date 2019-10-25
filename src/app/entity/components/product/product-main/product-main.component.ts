@@ -51,37 +51,22 @@ export class ProductMainComponent implements OnInit {
     this.crud.eventUpdateList.pipe().subscribe(isUpdateList => {
       //Data
       console.log("Update list:" + isUpdateList);
+      
       if (isUpdateList) {
         this.list.find();
+      };
+
+      if (this.crud.action == "DELETE") {
+        this.tabGroup.selectedIndex = 0;
       }
-      //Show view and alert
-      switch (this.crud.action) {
-        case "CREATE":
-          this.alerts.push({
-            type: 'success',
-            msg: `New product: ${this.crud.product.id}`,
-            timeout: 5000
-          });
-          break;
-        case "READ":
-          break;
-        case "UPDATE":
-            this.alerts.push({
-              type: 'warning',
-              msg: `Update product: ${this.crud.product.id}`,
-              timeout: 5000
-            });
-          break;
-        case "DELETE":
-            this.alerts.push({
-              type: 'danger',
-              msg: `Delete product: ${this.crud.product.id}`,
-              timeout: 5000
-            });
-            this.tabGroup.selectedIndex = 0;
-          break;
-      }
+
     });
+    /*
+    this.alerts.push({
+      type: 'success',
+      msg: `New product: ${this.crud.product.id}`,
+      timeout: 5000
+    });*/
   }
 
   onChangeTab(event: MatTabChangeEvent) {
