@@ -1,9 +1,7 @@
-import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { MatTabChangeEvent, MatTabNav } from '@angular/material/tabs';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ProductListComponent } from '../product-list/product-list.component';
 import { ProductCrudComponent } from '../product-crud/product-crud.component';
-import { AlertComponent } from 'ngx-bootstrap/alert/public_api';
-
 
 @Component({
   selector: 'entity-product-main',
@@ -18,15 +16,11 @@ export class ProductMainComponent implements OnInit {
   @ViewChild("tabCrud", { static: true }) tabCrud;
   @ViewChild("crud", { static: true }) crud: ProductCrudComponent;
 
-  //Alert
-  alerts: any[];
-
   constructor() { }
 
   ngOnInit() {
     this.captureEventList();
-    this.captureEventCrud();
-    this.alerts = [];
+    this.captureEventCrud();    
   }
 
   captureEventList() {
@@ -59,14 +53,8 @@ export class ProductMainComponent implements OnInit {
       if (this.crud.action == "DELETE") {
         this.tabGroup.selectedIndex = 0;
       }
-
-    });
-    /*
-    this.alerts.push({
-      type: 'success',
-      msg: `New product: ${this.crud.product.id}`,
-      timeout: 5000
-    });*/
+      
+    });    
   }
 
   onChangeTab(event: MatTabChangeEvent) {
@@ -75,10 +63,6 @@ export class ProductMainComponent implements OnInit {
       this.tabCrud.textLabel = "";
       this.tabCrud.disabled = true;
     }
-  }
-
-  onClosedAlert(dismissedAlert: AlertComponent): void {
-    this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);
-  }
+  }  
 
 }

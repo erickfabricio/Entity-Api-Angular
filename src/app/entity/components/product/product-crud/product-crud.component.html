@@ -2,15 +2,19 @@
 
     <!-- HEADER -->
     <div class="div-crud-header">
-        <h4>{{title}}
-            <span [ngSwitch]="action">
-                <button *ngSwitchCase="'CREATE'" type="button" class="btn btn-outline-success"
-                    (click)="onCreate()">Create</button>
-                <button *ngSwitchCase="'UPDATE'" type="button" class="btn btn-outline-warning"
-                    (click)="onUpdate()">Update</button>
-                <button *ngSwitchCase="'DELETE'" type="button" class="btn btn-outline-danger"
-                    (click)="onDelete()">Delete</button>
+        <h4 [ngSwitch]="action">
+            
+            {{title}}
+
+            <span *ngSwitchCase="'CREATE'">
+                <button type="button" class="btn btn-outline-success" (click)="onCreate()">Create</button>
             </span>
+
+            <span *ngSwitchCase="'CRUD'">
+                <button type="button" class="btn btn-outline-warning" (click)="onUpdate()">Update</button> 
+                <button type="button" class="btn btn-outline-danger" (click)="onDelete()">Delete</button>
+            </span>
+
         </h4>
     </div>
 
@@ -29,7 +33,7 @@
             <div class="div-crud-form-input input-container" *ngIf="visibleControls.name">
                 <mat-form-field>
                     <input matInput placeholder="Name" title="Name" #inputName type="text" formControlName="name"
-                        maxlength="30" >
+                        maxlength="30">
                     <mat-error *ngIf="form.get('name').invalid">{{getErrorMessageName()}}</mat-error>
                     <mat-hint align="end">{{inputName.value?.length || 0}}/30</mat-hint>
                 </mat-form-field>
@@ -37,5 +41,5 @@
 
         </form>
     </div>
-    
+
 </div>

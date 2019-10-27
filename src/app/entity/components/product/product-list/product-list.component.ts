@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/cor
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
 import { ProductModel } from 'src/app/entity/models/product.model';
 import { EntityService } from 'src/app/entity/services/entity.service';
 
@@ -23,17 +22,13 @@ export class ProductListComponent implements OnInit {
   products: ProductModel[];
   product: ProductModel;
   
-  //Alert
-  alerts: any[];
-
   constructor(private entityService: EntityService) { }
 
   ngOnInit() {
     this.displayedColumns = ['#', 'id', 'name'];
     this.dataSource = new MatTableDataSource<ProductModel>();
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.alerts = [];
+    this.dataSource.sort = this.sort;    
     this.find();
   }
 
@@ -44,10 +39,6 @@ export class ProductListComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  onClosedAlert(dismissedAlert: AlertComponent): void {
-    this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);
   }
 
   //************ EVENTS ************//

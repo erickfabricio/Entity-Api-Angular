@@ -45,7 +45,7 @@
 
             <!-- Header Table -->
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let product; columns: displayedColumns;" (click)="eventCrudEmitter('CREATE', product)"></tr>
+            <tr mat-row *matRowDef="let product; columns: displayedColumns;" (click)="eventCrudEmitter('CRUD', product)"></tr>
 
         </table>
 

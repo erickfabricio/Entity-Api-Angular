@@ -1,12 +1,5 @@
 <div class="container">
-
-    <!-- Alert -->
-    <div *ngFor="let alert of alerts">
-        <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" (onClosed)="onClosedAlert(alert)"
-            dismissible=true>{{ alert.msg }}
-        </alert>
-    </div>
-
+    
     <!-- Tags -->
     <mat-tab-group mat-align-tabs="start" #tabGroup (selectedTabChange)="onChangeTab($event)">
 
