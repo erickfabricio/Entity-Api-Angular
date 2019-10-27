@@ -15,7 +15,8 @@ import { ListComponent } from './test/list/list.component';
 import { CrudComponent } from './test/crud/crud.component';
 import { ProductMainComponent } from './components/product/product-main/product-main.component';
 import { UserMainComponent } from './components/user/user-main/user-main.component';
-import { EntityMainComponent } from './components/entity-main/entity-main.component';
+import { EntityMainComponent } from './components/main/main.component';
+
 
 @NgModule({
   declarations: [UserListComponent, UserCrudComponent, ProductListComponent, ProductCrudComponent, MainComponent, ListComponent, CrudComponent, ProductMainComponent, UserMainComponent, EntityMainComponent],
@@ -29,7 +30,7 @@ import { EntityMainComponent } from './components/entity-main/entity-main.compon
     AlertModule.forRoot()
   ],
   exports: [
-    UserListComponent, UserCrudComponent, ProductListComponent, ProductCrudComponent
+    UserMainComponent, UserListComponent, UserCrudComponent, ProductMainComponent, ProductListComponent, ProductCrudComponent, EntityMainComponent
   ],
   entryComponents: [UserCrudComponent]
 })

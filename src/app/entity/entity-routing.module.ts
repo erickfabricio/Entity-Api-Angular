@@ -6,8 +6,9 @@ import { ProductListComponent } from './components/product/product-list/product-
 import { ProductCrudComponent } from './components/product/product-crud/product-crud.component';
 import { MainComponent } from './test/main/main.component';
 import { ProductMainComponent } from './components/product/product-main/product-main.component';
-import { EntityMainComponent } from './components/entity-main/entity-main.component';
+
 import { UserMainComponent } from './components/user/user-main/user-main.component';
+import { EntityMainComponent } from './components/main/main.component';
 
 
 const routes: Routes = [

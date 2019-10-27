@@ -1,0 +1,32 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+
+    <mat-toolbar color="primary" class="example-toolbar">
+        <button mat-icon-button (click)="snav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <h1 class="example-app-name">Admin Mail</h1>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+
+        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+            fixedTopGap="56">
+
+            <mat-nav-list>
+                <button mat-list-item (click)="viewOption('Entity')">Entity</button>
+                <button mat-list-item (click)="viewOption('User')">User</button>
+                <button mat-list-item (click)="viewOption('Product')">Product</button>
+            </mat-nav-list>
+
+        </mat-sidenav>
+
+        <mat-sidenav-content [ngSwitch]="option">
+            <entity-main *ngSwitchCase="'Entity'"></entity-main>
+            <entity-user-main *ngSwitchCase="'User'"></entity-user-main>
+            <entity-product-main *ngSwitchCase="'Product'"></entity-product-main>
+            <entity-user-main *ngSwitchDefault></entity-user-main>
+        </mat-sidenav-content>
+
+    </mat-sidenav-container>
+
+</div>
